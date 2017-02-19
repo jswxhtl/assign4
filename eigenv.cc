@@ -1,5 +1,6 @@
 #include <iostream>
 #include <lapacke.h>
+#include <fstream>
 
 int main(int argc, char **argv) {
   int n=10, lda=10;
@@ -19,7 +20,10 @@ int main(int argc, char **argv) {
 
   //Using CBLAS interface
   LAPACKE_dsyev(LAPACK_COL_MAJOR, 'V', 'U', n, a, lda, w );
+  std::ofstream output;
+  output.open("eigenvaluesA.txt");
   for (int i = 0; i < n; i++)
-  std::cout<<w[i]<<'\n';
+  output<<w[i]<<'\n';
+  output.close();
   return 0;
 }
