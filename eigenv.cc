@@ -4,7 +4,7 @@
 int main(int argc, char **argv) {
   int n=10, lda=10;
   double *w = new double[n];
-  double a[n*lda] = {
+  double *a = new double[n*lda]{
     1, 11, 7, 9, 7, 11, 7, 9, 2, 11,
     11, 4, 10, 10, 6, 2, 9, 6,10, 0,
     7, 10, 3, 5, 4, 4, 4, 4, 6, 10,
@@ -25,6 +25,7 @@ int main(int argc, char **argv) {
   fout.close();
 
   delete [] w;
+  delete [] a;
 
   return 0;
 }
