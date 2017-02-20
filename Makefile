@@ -14,14 +14,14 @@ eigenv : eigenv.o
 eigenv.o : eigenv.cc
 	${CXX} ${CXXFLAGS} -c -o eigenv.o eigenv.cc ${BLASFLAGS} ${BLASLIBS}
 
-powermethod : powermethod.o find_max.o
-	${CXX} ${CXXFLAGS} -o powermethod powermethod.o find_max.o ${BLASFLAGS} ${BLASLIBS}
+powermethod : powermethod.o calculation.o
+	${CXX} ${CXXFLAGS} -o powermethod powermethod.o calculation.o ${BLASFLAGS} ${BLASLIBS}
 
-powermethod.o : powermethod.cc find_max.h
+powermethod.o : powermethod.cc calculation.h
 	${CXX} ${CXXFLAGS} -c powermethod.cc ${BLASFLAGS} ${BLASLIBS}
 
-find_max.o : find_max.cc
-	${CXX} ${CXXFLAGS} -c find_max.cc ${BLASFLAGS} ${BLASLIBS}
+calculation.o : calculation.cc
+	${CXX} ${CXXFLAGS} -c calculation.cc ${BLASFLAGS} ${BLASLIBS}
 
 .PHONY: clean
 # clean all dependencies, result and the executable
