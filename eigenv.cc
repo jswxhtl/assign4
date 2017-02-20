@@ -3,7 +3,7 @@
 
 int main(int argc, char **argv) {
   int n=10, lda=10;
-  double w[n] = {};
+  double *w = new double[n];
   double a[n*lda] = {
     1, 11, 7, 9, 7, 11, 7, 9, 2, 11,
     11, 4, 10, 10, 6, 2, 9, 6,10, 0,
@@ -23,5 +23,8 @@ int main(int argc, char **argv) {
   for (int i = 0; i < n; i++)
   fout<<w[i]<<'\n';
   fout.close();
+
+  delete [] w;
+
   return 0;
 }
