@@ -1,5 +1,7 @@
 #include <lapacke.h>
 #include <fstream>
+#include "calculation.h"
+#include <iostream>
 
 int main(int argc, char **argv) {
   int n=10, lda=10;
@@ -16,13 +18,23 @@ int main(int argc, char **argv) {
     2, 10, 6, 1, 10, 5, 7, 1, 10, 5,
     11, 0, 10, 8, 0, 11, 2, 7, 5, 1
   };
+  double *a_operator = new double[n*lda];
+  for (int i = 0; i < n*lda; i++) {
+    a_operator[i] = a[i];
+  }
 
   //Using CBLAS interface
-  LAPACKE_dsyev(LAPACK_COL_MAJOR, 'V', 'U', n, a, lda, w );
+  LAPACKE_dsyev(LAPACK_COL_MAJOR, 'V', 'U', n, a_operator, lda, w );
   std::ofstream fout("eigenvaluesA.txt");
   for (int i = 0; i < n; i++)
   fout<<w[i]<<'\n';
   fout.close();
+
+  if (gershgorin_test(lda, n, a, w) == 0) {
+    std::cout << "Gershgorin theorem satisfied!" << std::endl;
+  } else {
+    std::cout << "Gershgorin theorem unsatisfied!" << std::endl;
+  }
 
   delete [] w;
   delete [] a;

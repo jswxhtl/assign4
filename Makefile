@@ -8,10 +8,10 @@ BLASLIBS = -lopenblas
 
 all: eigenv powermethod
 # target executable dependency
-eigenv : eigenv.o
-	${CXX} ${CXXFLAGS} -o eigenv eigenv.o ${BLASFLAGS} ${BLASLIBS}
+eigenv : eigenv.o calculation.o
+	${CXX} ${CXXFLAGS} -o eigenv eigenv.o calculation.o ${BLASFLAGS} ${BLASLIBS}
 
-eigenv.o : eigenv.cc
+eigenv.o : eigenv.cc calculation.h
 	${CXX} ${CXXFLAGS} -c -o eigenv.o eigenv.cc ${BLASFLAGS} ${BLASLIBS}
 
 powermethod : powermethod.o calculation.o
